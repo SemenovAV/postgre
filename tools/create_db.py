@@ -3,10 +3,9 @@ from config import HOST, DB, DB_USER, DB_PASSWORD
 
 
 def create_db():
-    '''
+    """
     Создает таблицы.
-    :return:
-    '''
+    """
     try:
         with pg.connect(f'host={HOST} dbname={DB} user={DB_USER} password={DB_PASSWORD}') as conn:
             with conn.cursor() as cur:
