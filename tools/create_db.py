@@ -15,7 +15,7 @@ def create_db():
                         CREATE TABLE student(
                         id serial PRIMARY KEY ,
                         name varchar(100) NOT NULL,
-                        gpa numeric(10, 2) ,
+                        gpa numeric(10, 2) NULL ,
                         birth timestamp with time zone
                         );
 
