@@ -1,33 +1,4 @@
-import psycopg2 as pg
-from config import HOST, PORT, DB, DB_USER, DB_PASSWORD
+from tools import queryes
+from tools.get_executed_query import get_executed_query as geq
 
-
-def get_student(student):
-    """
-    cоздает студента
-    """
-    try:
-        with pg.connect(
-                f'host={HOST} '
-                f'port={PORT} '
-                f'dbname={DB} '
-                f' user={DB_USER} '
-                f'password={DB_PASSWORD} '
-        ) as conn:
-            with conn.cursor() as cur:
-                try:
-                    cur.execute(
-                        '''
-                        SELECT * FROM student WHERE name = %s
-                        ''', (student['name'],)
-
-                    )
-
-                    return tuple(cur)
-                except pg.Error as e:
-                    print(e.pgerror)
-                    return False
-    except pg.Error as e:
-        print('Ошибка подключения к базе данных! Проверьте настройки подключения.')
-        return False
-    return True
+get_student = lambda student: geq(queryes.get_student, student)
